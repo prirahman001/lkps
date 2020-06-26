@@ -18,15 +18,17 @@
             <li><i class="fa fa-th"></i><a href="ui-grids.html">Grids</a></li>
             <li><i class="fa fa-file-word-o"></i><a href="ui-typgraphy.html">Typography</a></li>
         </ul>
-    </li>
-    <li class="menu-item-has-children dropdown">
-        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-table"></i>Tables</a>
-        <ul class="sub-menu children dropdown-menu">
-            <li><i class="fa fa-table"></i><a href="tables-basic.html">Basic Table</a></li>
-            <li><i class="fa fa-table"></i><a href="tables-data.html">Data Table</a></li>
-        </ul>
-    </li>
-    <li class="menu-item-has-children dropdown">
+</li>
+<li class="menu-item-has-children dropdown">
+<a href="#" class="dropdown-toggle" data-toggle="dropdown"
+ria-haspopup="true" aria-expanded="false">
+<i class="menu-icon fa fa-table"></i>Tables</a>
+<ul class="sub-menu children dropdown-menu">
+<li><i class="fa fa-table"></i><a href="tables-basic.html">Basic Table</a></li>
+<li><i class="fa fa-table"></i><a href="tables-data.html">Data Table</a></li>
+</ul>
+</li>
+<li class="menu-item-has-children dropdown">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-th"></i>Forms</a>
         <ul class="sub-menu children dropdown-menu">
             <li><i class="menu-icon fa fa-th"></i><a href="forms-basic.html">Basic Form</a></li>
