@@ -5,7 +5,6 @@
 <!--[if gt IE 8]><!-->
 <html class="no-js" lang="">
 <!--<![endif]-->
-
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -24,6 +23,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.2.0/css/flag-icon.min.css">
     <link rel="stylesheet" href="<?= base_url() ?>asset/assets/css/cs-skin-elastic.css">
     <link rel="stylesheet" href="<?= base_url() ?>asset/assets/css/style.css">
+      <link rel="stylesheet" href="<?= base_url() ?>asset/assets/css/dataTables.min.css">
+
     <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.min.js"></script> -->
     <link href="https://cdn.jsdelivr.net/npm/chartist@0.11.0/dist/chartist.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/jqvmap@1.5.1/dist/jqvmap.min.css" rel="stylesheet">
@@ -233,8 +234,8 @@
     <script src="https://cdn.jsdelivr.net/npm/flot-spline@0.0.1/js/jquery.flot.spline.min.js"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/simpleweather@3.1.0/jquery.simpleWeather.min.js"></script>
-    <script src="assets/js/init/weather-init.js"></script>
-
+    <script src="<?= base_url() ?>asset/assets/js/init/weather-init.js"></script>
+    <script src="<?= base_url() ?>asset/assets/js/dataTables.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/moment.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/fullcalendar@3.9.0/dist/fullcalendar.min.js"></script>
     <script src="<?= base_url() ?>asset/assets/js/init/fullcalendar-init.js"></script>
@@ -243,7 +244,7 @@
     <script>
         jQuery(document).ready(function($) {
             "use strict";
-
+            $('.data').DataTable();
             // Pie chart flotPie1
             var piedata = [{
                     label: "Desktop visits",

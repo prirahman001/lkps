@@ -26,7 +26,7 @@ class Login extends CI_Controller
           $datasession = array(
             'id_login' => $key ['id_user'],
             'prodi_login' => $key ['prodi_kode'],
-            'prodi_login' => $key ['prodi_kode'],
+            // 'prodi_login' => $key ['prodi_kode'],
             'nama_login' => $key ['nama_user'],
             'username_login' => $key ['username'],
             'level_login' => $key ['level_user'],

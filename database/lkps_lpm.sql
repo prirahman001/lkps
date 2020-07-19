@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 24, 2020 at 10:19 AM
+-- Generation Time: Jul 19, 2020 at 04:38 PM
 -- Server version: 10.4.8-MariaDB
 -- PHP Version: 7.3.11
 
@@ -90,6 +90,25 @@ INSERT INTO `fakultas_tabel` (`id_fakultas`, `kode_fakultas`, `nama_fakultas`) V
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `induk_kriteria`
+--
+
+CREATE TABLE `induk_kriteria` (
+  `id_induk` int(11) NOT NULL,
+  `nama_induk` varchar(100) DEFAULT NULL,
+  `kriteria_id` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `induk_kriteria`
+--
+
+INSERT INTO `induk_kriteria` (`id_induk`, `nama_induk`, `kriteria_id`) VALUES
+(1, 'Tata Pamong, Tata Kelola, & Kerjasama', NULL);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `jabatabanak_tabel`
 --
 
@@ -110,14 +129,33 @@ CREATE TABLE `kerjasama_tabel` (
   `id_kerjasama` int(11) NOT NULL,
   `kode_prodi` varchar(10) NOT NULL,
   `nama_lembaga` varchar(150) NOT NULL,
-  `tingkat_levelks` varchar(2) DEFAULT NULL,
+  `ting_internasional` tinyint(4) DEFAULT NULL,
+  `ting_nasional` tinyint(4) DEFAULT NULL,
+  `ting_lokal` tinyint(4) DEFAULT NULL,
   `judul_kegiatanks` varchar(225) DEFAULT NULL,
   `manfaat_ks` text DEFAULT NULL,
   `awal_ks` date DEFAULT NULL,
   `selesai_ks` date DEFAULT NULL,
   `bukti_ks` text DEFAULT NULL,
-  `kriteria_kode` varchar(10) NOT NULL
+  `kriteria_kode` varchar(10) NOT NULL,
+  `created_at` date NOT NULL DEFAULT current_timestamp(),
+  `updated_at` date DEFAULT NULL,
+  `gkm_status` tinyint(4) DEFAULT 0,
+  `gpm_status` tinyint(4) DEFAULT 0,
+  `lpm_status` tinyint(4) DEFAULT 0,
+  `tu_status` tinyint(4) DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `kerjasama_tabel`
+--
+
+INSERT INTO `kerjasama_tabel` (`id_kerjasama`, `kode_prodi`, `nama_lembaga`, `ting_internasional`, `ting_nasional`, `ting_lokal`, `judul_kegiatanks`, `manfaat_ks`, `awal_ks`, `selesai_ks`, `bukti_ks`, `kriteria_kode`, `created_at`, `updated_at`, `gkm_status`, `gpm_status`, `lpm_status`, `tu_status`) VALUES
+(1, 'ft01', 'GOLOK DIKI', 1, 1, NULL, 'menjual golok', 'sangat bermanfaat untuk ngarit', '2020-07-18', '2020-10-10', NULL, '1', '2020-07-19', NULL, 1, 0, 0, 1),
+(2, 'ft01', 'sS', 1, 0, 0, 'SAAS', 'sdfsffs', NULL, NULL, 'tifs', '1', '2020-07-19', NULL, 1, 0, 0, 1),
+(3, 'ft01', 'czch', 1, 0, 0, 'tsus', 'hdjlsufn', NULL, NULL, 'MOU', '1', '2020-07-19', NULL, 0, 0, 0, 1),
+(4, 'ft01', 'tanapa', 1, 1, 0, 'disjlfjls', 'sidjijsljflsjlsjflslkvkvskvskvksk', NULL, NULL, 'ususs', '1', '2020-07-19', NULL, 0, 0, 0, 1),
+(5, 'ft01', 'ksksa', 1, 1, 0, 'osdoko', 'fjljsfjfls', '2020-07-01', '2020-07-30', 'MOU', '1', '2020-07-19', NULL, 0, 0, 0, 1);
 
 -- --------------------------------------------------------
 
@@ -131,6 +169,15 @@ CREATE TABLE `kriteria_tabel` (
   `nama_kriteria` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `kriteria_tabel`
+--
+
+INSERT INTO `kriteria_tabel` (`id_kriteria`, `kode_kriteria`, `nama_kriteria`) VALUES
+(1, '1', 'Kerjasama'),
+(2, '21', 'Seleksi Mahasiswa'),
+(3, '22', 'Mahasiswa Asing');
+
 -- --------------------------------------------------------
 
 --
@@ -138,7 +185,7 @@ CREATE TABLE `kriteria_tabel` (
 --
 
 CREATE TABLE `mahasiswa_asing_tabel` (
-  `is_mhs_asing` int(11) NOT NULL,
+  `id_mhs_asing` int(11) NOT NULL,
   `prodi_kode` varchar(10) DEFAULT NULL,
   `tahun_akademik_asing` date DEFAULT NULL,
   `jumlahmhsaktif_asing` int(11) DEFAULT NULL,
@@ -156,7 +203,7 @@ CREATE TABLE `mahasiswa_asing_tabel` (
 CREATE TABLE `mahasiswa_seleksi_tabel` (
   `id_mhs_seleksi` int(11) NOT NULL,
   `prodi_kode` int(11) DEFAULT NULL,
-  `tahun_akademik` date DEFAULT NULL,
+  `tahun_akademik` varchar(4) DEFAULT NULL,
   `daya_tampung` int(11) DEFAULT NULL,
   `pendaftar_msh` int(11) DEFAULT NULL,
   `lulus_seleksi_mhs` int(11) DEFAULT NULL,
@@ -164,8 +211,17 @@ CREATE TABLE `mahasiswa_seleksi_tabel` (
   `transfer_baru_mhs` int(11) DEFAULT NULL,
   `reguler_aktif_mhs` int(11) DEFAULT NULL,
   `transferaktif_mhs` int(11) DEFAULT NULL,
-  `kriteria_kode` varchar(10) DEFAULT NULL
+  `kriteria_kode` varchar(10) DEFAULT NULL,
+  `created_at` date NOT NULL DEFAULT current_timestamp(),
+  `updated_at` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `mahasiswa_seleksi_tabel`
+--
+
+INSERT INTO `mahasiswa_seleksi_tabel` (`id_mhs_seleksi`, `prodi_kode`, `tahun_akademik`, `daya_tampung`, `pendaftar_msh`, `lulus_seleksi_mhs`, `reguler_baru_mhs`, `transfer_baru_mhs`, `reguler_aktif_mhs`, `transferaktif_mhs`, `kriteria_kode`, `created_at`, `updated_at`) VALUES
+(1, 0, '2244', 4535, 57, 57, 57, 900, 886, 55, '21', '2020-07-19', '0000-00-00');
 
 -- --------------------------------------------------------
 
@@ -398,7 +454,8 @@ CREATE TABLE `user_tabel` (
 
 INSERT INTO `user_tabel` (`id_user`, `prodi_kode`, `nama_user`, `username`, `password_user`, `level_user`) VALUES
 (1, 'ft01', 'mas prodi TI', 'ti', 'a', 5),
-(2, 'Fks01', 'mas prodi fks', 'fks', 'aa', 5);
+(2, 'fks01', 'mas prodi fks', 'fks', 'aa', 5),
+(3, 'ft01', 'GKM_Pak Yuggo', 'gkmti', 'gkmti', 4);
 
 --
 -- Indexes for dumped tables
@@ -430,6 +487,12 @@ ALTER TABLE `fakultas_tabel`
   ADD UNIQUE KEY `kode_fakultas` (`kode_fakultas`);
 
 --
+-- Indexes for table `induk_kriteria`
+--
+ALTER TABLE `induk_kriteria`
+  ADD PRIMARY KEY (`id_induk`);
+
+--
 -- Indexes for table `jabatabanak_tabel`
 --
 ALTER TABLE `jabatabanak_tabel`
@@ -453,7 +516,7 @@ ALTER TABLE `kriteria_tabel`
 -- Indexes for table `mahasiswa_asing_tabel`
 --
 ALTER TABLE `mahasiswa_asing_tabel`
-  ADD PRIMARY KEY (`is_mhs_asing`);
+  ADD PRIMARY KEY (`id_mhs_asing`);
 
 --
 -- Indexes for table `mahasiswa_seleksi_tabel`
@@ -566,6 +629,12 @@ ALTER TABLE `fakultas_tabel`
   MODIFY `id_fakultas` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
+-- AUTO_INCREMENT for table `induk_kriteria`
+--
+ALTER TABLE `induk_kriteria`
+  MODIFY `id_induk` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT for table `jabatabanak_tabel`
 --
 ALTER TABLE `jabatabanak_tabel`
@@ -575,25 +644,25 @@ ALTER TABLE `jabatabanak_tabel`
 -- AUTO_INCREMENT for table `kerjasama_tabel`
 --
 ALTER TABLE `kerjasama_tabel`
-  MODIFY `id_kerjasama` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_kerjasama` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `kriteria_tabel`
 --
 ALTER TABLE `kriteria_tabel`
-  MODIFY `id_kriteria` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_kriteria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `mahasiswa_asing_tabel`
 --
 ALTER TABLE `mahasiswa_asing_tabel`
-  MODIFY `is_mhs_asing` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_mhs_asing` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `mahasiswa_seleksi_tabel`
 --
 ALTER TABLE `mahasiswa_seleksi_tabel`
-  MODIFY `id_mhs_seleksi` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_mhs_seleksi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `matakuliah_table`
@@ -665,7 +734,7 @@ ALTER TABLE `sitasidosen_tabel`
 -- AUTO_INCREMENT for table `user_tabel`
 --
 ALTER TABLE `user_tabel`
-  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

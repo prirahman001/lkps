@@ -1,31 +1,22 @@
 <ul class="nav navbar-nav">
     <li class="active">
-        <a href="index.html"><i class="menu-icon fa fa-laptop"></i>Dashboard </a>
+        <a href="<?php echo base_url().'Dashboard'?>"><i class="menu-icon fa fa-laptop"></i>Dashboard </a>
     </li>
-    <li class="menu-title">UI elements</li><!-- /.menu-title -->
+    <li class="menu-title">LIST KRITERIA</li><!-- /.menu-title -->
     <li class="menu-item-has-children dropdown">
-        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-cogs"></i>Components</a>
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-cogs">
+        </i>Kerjasama</a>
         <ul class="sub-menu children dropdown-menu">
-            <li><i class="fa fa-puzzle-piece"></i><a href="ui-buttons.html">Buttons</a></li>
-            <li><i class="fa fa-id-badge"></i><a href="ui-badges.html">Badges</a></li>
-            <li><i class="fa fa-bars"></i><a href="ui-tabs.html">Tabs</a></li>
-
-            <li><i class="fa fa-id-card-o"></i><a href="ui-cards.html">Cards</a></li>
-            <li><i class="fa fa-exclamation-triangle"></i><a href="ui-alerts.html">Alerts</a></li>
-            <li><i class="fa fa-spinner"></i><a href="ui-progressbar.html">Progress Bars</a></li>
-            <li><i class="fa fa-fire"></i><a href="ui-modals.html">Modals</a></li>
-            <li><i class="fa fa-book"></i><a href="ui-switches.html">Switches</a></li>
-            <li><i class="fa fa-th"></i><a href="ui-grids.html">Grids</a></li>
-            <li><i class="fa fa-file-word-o"></i><a href="ui-typgraphy.html">Typography</a></li>
+            <li><i class="fa fa-puzzle-piece"></i><a href="<?php echo base_url().'kerjasama/' ?>">Sub Kerjasama</a></li>
         </ul>
 </li>
 <li class="menu-item-has-children dropdown">
 <a href="#" class="dropdown-toggle" data-toggle="dropdown"
 ria-haspopup="true" aria-expanded="false">
-<i class="menu-icon fa fa-table"></i>Tables</a>
+<i class="menu-icon fa fa-table"></i>Mahasiswa</a>
 <ul class="sub-menu children dropdown-menu">
-<li><i class="fa fa-table"></i><a href="tables-basic.html">Basic Table</a></li>
-<li><i class="fa fa-table"></i><a href="tables-data.html">Data Table</a></li>
+<li><i class="fa fa-table"></i><a href="<?php echo base_url().'mahasiswa' ?>">Kualiatas Input Mahasiswa</a></li>
+<li><i class="fa fa-table"></i><a href="<?php echo base_url().'mahasiswa/mahasiswa_asing' ?>">Mahasiswa Asing</a></li>
 </ul>
 </li>
 <li class="menu-item-has-children dropdown">
