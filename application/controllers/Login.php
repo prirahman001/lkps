@@ -15,19 +15,23 @@ class Login extends CI_Controller
 
     public function auth()
     {
+
       $input = $this->input->post();
-      // print_r($input);
-      $check=$this->Login_model->auth($input["username"],$input["password"]);
-      print_r($check->num_rows());
-      if ($check->num_rows() == 1) {
-//// logi session
+      $check = $this->Login_model->auth($input["username"],$input["password"]);
+      // print_r($check->result_array()[0]['prodi_kode']);
+      $kode_prodi = $check->result_array()[0]['prodi_kode'];
+      $nama_prodi = $this->db->get_where('prodi_tabel', array('kode_prodi'=>$kode_prodi))->row();
+
+      // print_r($check->result_array());
+      //
+      if ($check->result_array() > 0) {
         $datasession= array ();
         foreach ($check->result_array() as $key) {
           $datasession = array(
             'id_login' => $key ['id_user'],
             'prodi_login' => $key ['prodi_kode'],
-            // 'prodi_login' => $key ['prodi_kode'],
             'nama_login' => $key ['nama_user'],
+            'prodi' => $nama_prodi->nama_prodi,
             'username_login' => $key ['username'],
             'level_login' => $key ['level_user'],
             'is_login' => 1
@@ -35,7 +39,6 @@ class Login extends CI_Controller
 
       }
       $this->session->set_userdata($datasession);
-        // redirect "/login";
         redirect('dashboard');
       }
       else {

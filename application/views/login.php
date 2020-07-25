@@ -1,74 +1,76 @@
-<!doctype html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9" lang=""> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang=""> <!--<![endif]-->
+<!DOCTYPE html>
+<html lang="en">
+
+
+<!-- Mirrored from www.radixtouch.in/templates/admin/lorax/source/light/pages/examples/sign-in.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 15 Nov 2019 17:15:15 GMT -->
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Ela Admin - HTML5 Admin Template</title>
-    <meta name="description" content="Ela Admin - HTML5 Admin Template">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta charset="UTF-8">
+	<meta content="width=device-width, initial-scale=1" name="viewport" />
+	<title>Login | LKPS </title>
+	<!-- Favicon-->
+	<link rel="icon" href="<?= base_url() ?>assets/images/favicon.ico" type="image/x-icon">
 
-    <link rel="apple-touch-icon" href="https://i.imgur.com/QRAUqs9.png">
-    <link rel="shortcut icon" href="https://i.imgur.com/QRAUqs9.png">
+	<!-- Plugins Core Css -->
+	<link href="<?= base_url() ?>assets/css/app.min.css" rel="stylesheet">
 
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/normalize.css@8.0.0/normalize.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lykmapipo/themify-icons@0.1.2/css/themify-icons.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pixeden-stroke-7-icon@1.2.3/pe-icon-7-stroke/dist/pe-icon-7-stroke.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.2.0/css/flag-icon.min.css">
-    <link rel="stylesheet" href="<?= base_url() ?>asset/assets/css/cs-skin-elastic.css">
-    <link rel="stylesheet" href="<?= base_url() ?>asset/assets/css/style.css">
-
-    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
-
-    <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.min.js"></script> -->
+	<!-- Custom Css -->
+	<link href="<?= base_url() ?>assets/css/style.css" rel="stylesheet" />
+	<link href="<?= base_url() ?>assets/css/pages/extra_pages.css" rel="stylesheet" />
 </head>
-<body class="bg-dark">
 
-    <div class="sufee-login d-flex align-content-center flex-wrap">
-        <div class="container">
-            <div class="login-content">
-                <div class="login-logo">
-                    <a href="<?= base_url() ?>asset/index.html">
-                        <img class="align-content" src="images/logo.png" alt="">
-                    </a>
-                </div>
-      <!-- SILO LOGIN -->
-                <div class="login-form">
-                    <form action="<?= base_url()?>login/auth" method="post">
-                        <div class="form-group">
-                            <label>Email address</label>
-                            <input type="text" name="username"  class="form-control" placeholder="Email">
-                        </div>
-                        <div class="form-group">
-                            <label>Password</label>
-                            <input type="password" name="password" class="form-control" placeholder="Password">
-                        </div>
-                        <div class="checkbox">
-                            <label>
-                                <input type="checkbox"> Remember Me
-                            </label>
-                            <label class="pull-right">
-                                <a href="#">Forgotten Password?</a>
-                            </label>
+<body class="login-page">
+	<div class="limiter">
+		<div class="container-login100 page-background">
+			<div class="wrap-login100">
+				<form action="<?= base_url()?>login/auth" method="post" class="login100-form validate-form" >
+					<span class="login100-form-logo">
+						<img alt="" src="<?= base_url() ?>assets/images/loading.png">
+					</span>
+					<span class="login100-form-title p-b-34 p-t-27">
+						Log in
+					</span>
+					<div class="wrap-input100 validate-input" data-validate="Enter username">
+						<input class="input100" type="text" name="username" placeholder="Username">
+						<i class="material-icons focus-input1001">person</i>
+					</div>
+					<div class="wrap-input100 validate-input" data-validate="Enter password">
+						<input class="input100" type="password" name="password" placeholder="Password">
+						<i class="material-icons focus-input1001">lock</i>
+					</div>
+					<div class="contact100-form-checkbox">
+						<div class="form-check">
+							<label class="form-check-label">
+								<input class="form-check-input" type="checkbox" value=""> Remember me
+								<span class="form-check-sign">
+									<span class="check"></span>
+								</span>
+							</label>
+						</div>
+					</div>
+					<div class="container-login100-form-btn">
+						<button class="login100-form-btn">
+							Login
+						</button>
+					</div>
+					<div class="text-center p-t-50">
+						<a class="txt1" href="forgot-password.html">
+							Forgot Password?
+						</a>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
 
-                        </div>
-                        <button type="submit" class="btn btn-success btn-flat m-b-30 m-t-30">Sign in</button>
+	<!-- Plugins Js -->
 
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
+	<script src="<?= base_url() ?>assets/js/app.min.js"></script>
 
-    <script src="https://cdn.jsdelivr.net/npm/jquery@2.2.4/dist/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/jquery-match-height@0.7.2/dist/jquery.matchHeight.min.js"></script>
-    <script src="<?= base_url() ?>asset/assets/js/main.js"></script>
+	<!-- Extra page Js -->
+	<script src="<?= base_url() ?>assets/js/pages/examples/pages.js"></script>
 
 </body>
+
+
+<!-- Mirrored from www.radixtouch.in/templates/admin/lorax/source/light/pages/examples/sign-in.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 15 Nov 2019 17:15:16 GMT -->
 </html>
