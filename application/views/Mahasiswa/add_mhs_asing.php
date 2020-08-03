@@ -32,6 +32,7 @@
                   <div class="row clearfix">
                       <div class="col-sm-12">
                         <form action="<?php echo base_url() ?>mahasiswa/simpan_data_asing" method="post">
+                          <input type="hidden" name="id_mhs_asing" value="<?= isset($list_mhs_asing->id_mhs_asing) ? $list_mhs_asing->id_mhs_asing : ''?>">
                           <div class="form-group">
                               <div class="form-line">
                                   <input type="number" value="<?=isset($list_mhs_asing->tahun_akademik_asing) ? $list_mhs_asing->tahun_akademik_asing : ''?>" name="tahun_akademik_asing" class="form-control" placeholder="Tahun Akademik" />

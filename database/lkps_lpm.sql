@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 25, 2020 at 05:32 PM
+-- Generation Time: Aug 03, 2020 at 10:22 AM
 -- Server version: 10.4.8-MariaDB
 -- PHP Version: 7.3.11
 
@@ -151,9 +151,9 @@ CREATE TABLE `kerjasama_tabel` (
   `prodi_kode` varchar(10) NOT NULL,
   `nama_lembaga` varchar(150) NOT NULL,
   `lokasi_ks` varchar(20) DEFAULT NULL,
-  `ting_internasional` tinyint(4) DEFAULT NULL,
-  `ting_nasional` tinyint(4) DEFAULT NULL,
-  `ting_lokal` tinyint(4) DEFAULT NULL,
+  `ting_internasional` tinyint(4) DEFAULT 0,
+  `ting_nasional` tinyint(4) DEFAULT 0,
+  `ting_lokal` tinyint(4) DEFAULT 0,
   `judul_kegiatanks` varchar(225) DEFAULT NULL,
   `jenispatner_ks` varchar(100) DEFAULT NULL,
   `manfaat_ks` text DEFAULT NULL,
@@ -166,6 +166,7 @@ CREATE TABLE `kerjasama_tabel` (
   `gkm_status` tinyint(4) DEFAULT 0,
   `gpm_status` tinyint(4) DEFAULT 0,
   `lpm_status` tinyint(4) DEFAULT 0,
+  `dekan_status` tinyint(4) NOT NULL DEFAULT 0,
   `tu_status` tinyint(4) DEFAULT 1,
   `filedoc_ks` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -174,15 +175,15 @@ CREATE TABLE `kerjasama_tabel` (
 -- Dumping data for table `kerjasama_tabel`
 --
 
-INSERT INTO `kerjasama_tabel` (`id_kerjasama`, `prodi_kode`, `nama_lembaga`, `lokasi_ks`, `ting_internasional`, `ting_nasional`, `ting_lokal`, `judul_kegiatanks`, `jenispatner_ks`, `manfaat_ks`, `awal_ks`, `selesai_ks`, `bukti_ks`, `kriteria_kode`, `created_at`, `updated_at`, `gkm_status`, `gpm_status`, `lpm_status`, `tu_status`, `filedoc_ks`) VALUES
-(1, 'ti01', 'GOLOK DIKI', NULL, 1, 1, NULL, 'menjual golok', NULL, 'sangat bermanfaat untuk ngarit', '2020-07-18', '2020-10-10', NULL, '1', '2020-07-19', NULL, 1, 1, 1, 1, NULL),
-(2, 'ti01', 'sS', NULL, 1, 0, 0, 'SAAS', NULL, 'sdfsffs', NULL, NULL, 'tifs', '1', '2020-07-19', NULL, 1, 0, 0, 1, NULL),
-(3, 'ti01', 'czch', NULL, 1, 0, 0, 'tsus', NULL, 'hdjlsufn', NULL, NULL, 'MOU', '1', '2020-07-19', NULL, 1, 0, 0, 1, NULL),
-(4, 'ti01', 'tanapa', NULL, 1, 1, 0, 'disjlfjls', NULL, 'sidjijsljflsjlsjflslkvkvskvskvksk', NULL, NULL, 'ususs', '1', '2020-07-19', NULL, 1, 0, 0, 1, NULL),
-(5, 'ti01', 'ksksa', NULL, 1, 1, 0, 'osdoko', NULL, 'fjljsfjfls', '2020-07-01', '2020-07-30', 'MOU', '1', '2020-07-19', NULL, 0, 0, 0, 1, NULL),
-(7, 'fks01', 'tiyo', NULL, 1, 1, 0, 'bawa', NULL, 'djoaijdio', '0000-00-00', '2020-07-31', 'MOU', '1', '2020-07-20', NULL, 0, 0, 0, 1, NULL),
-(8, 'fks01', 'furnitur silo', NULL, 1, 0, 1, 'Membantu bagunan', NULL, 'hdajhdishidshiashdsai', '2020-07-22', '2020-07-25', 'MOU', '1', '2020-07-21', NULL, 0, 0, 0, 1, NULL),
-(12, 'ti01', 'Sablon', 'bogor', 1, NULL, NULL, 'taw', 'Institusi Pemerintah DN', 'asdasd', '2020-07-25', '2020-07-30', 'Implementations Agreement', '1', '2020-07-23', NULL, 0, 0, 0, 1, NULL);
+INSERT INTO `kerjasama_tabel` (`id_kerjasama`, `prodi_kode`, `nama_lembaga`, `lokasi_ks`, `ting_internasional`, `ting_nasional`, `ting_lokal`, `judul_kegiatanks`, `jenispatner_ks`, `manfaat_ks`, `awal_ks`, `selesai_ks`, `bukti_ks`, `kriteria_kode`, `created_at`, `updated_at`, `gkm_status`, `gpm_status`, `lpm_status`, `dekan_status`, `tu_status`, `filedoc_ks`) VALUES
+(7, 'fks01', 'tiyo', NULL, 1, 1, 0, 'bawa', NULL, 'djoaijdio', '0000-00-00', '2020-07-31', 'MOU', '1', '2020-07-20', NULL, 0, 0, 0, 0, 1, NULL),
+(8, 'fks01', 'furnitur silo', NULL, 1, 0, 1, 'Membantu bagunan', NULL, 'hdajhdishidshiashdsai', '2020-07-22', '2020-07-25', 'MOU', '1', '2020-07-21', NULL, 0, 0, 0, 0, 1, NULL),
+(13, 'fks01', 'Sablon bogor', 'bogor', 1, 1, NULL, 'belum ada', 'Institusi Pemerintah DN', 'sagat', '2020-07-27', '2020-07-31', 'MoU', '1', '2020-07-26', NULL, 0, 0, 0, 0, 1, NULL),
+(14, 'fks01', 'oke cetak', 'jakarta', 0, 1, 0, 'Sans', 'Institusi Pedididkan DN', 'sans', '2020-07-28', '2020-07-31', 'Implementations Agreement', '1', '2020-07-26', NULL, 0, 0, 0, 0, 1, NULL),
+(15, 'ti01', 'test', 'test', 0, 1, 0, 'tets', 'Institusi Pemerintah LN', 'test', '2020-07-29', '2020-07-31', 'Implementations Agreement', '1', '2020-07-26', NULL, 2, 2, 0, 0, 2, NULL),
+(16, 'ti01', 'tres', 'trea', 0, 1, 0, 'tsus', 'Institusi Pemerintah DN', 'trt', '2020-07-23', '2020-07-25', 'MoU', '1', '2020-07-26', NULL, 2, 2, 0, 0, 2, NULL),
+(18, 'ti01', 'test 1', 'bogor', 1, 0, 0, 'SAAS', 'Institusi Pedididkan LN', 'dhad', '2020-07-30', '2020-08-01', 'Implementations Agreement', '1', '2020-07-30', NULL, 1, 0, 0, 0, 1, NULL),
+(19, 'ti01', 'tiyo', 'bogor', 0, 1, 0, 'bawa', 'Institusi Pedididkan DN', 'gadjsgjads', '2020-08-15', '2020-08-20', 'MoU', '1', '2020-08-01', NULL, 1, 0, 0, 0, 1, NULL);
 
 -- --------------------------------------------------------
 
@@ -234,11 +235,10 @@ CREATE TABLE `mahasiswa_asing_tabel` (
 --
 
 INSERT INTO `mahasiswa_asing_tabel` (`id_mhs_asing`, `prodi_kode`, `nama_prodi`, `tahun_akademik_asing`, `jumlahmhsaktif_asing`, `jumlahmhsfull_asing`, `jumlahmhspart_asing`, `kriteria_kode`, `created_at`, `updated_at`, `tu_status`, `gkm_status`, `gpm_status`, `lpm_status`, `dekan_status`) VALUES
-(3, 'ti01', 'teknik informatika', '2000', 100, 50, 50, '21', '2020-07-25', '0000-00-00', 1, 0, 0, 0, 0),
 (4, 'ti01', 'teknik informatika', '2021', 100, 50, 50, '21', '2020-07-25', '0000-00-00', 1, 0, 0, 0, 0),
 (9, 'ti01', 'teknik informatika', '2001', 100, 50, 50, '21', '2020-07-25', '0000-00-00', 1, 0, 0, 0, 0),
 (10, 'ti01', 'teknik informatika', '2002', 100, 50, 50, '21', '2020-07-25', '0000-00-00', 1, 0, 0, 0, 0),
-(15, 'fks01', 'kesehatan masyarakat', '100', 123, 1231, 123, '21', '2020-07-25', '0000-00-00', 1, 0, 0, 0, 0),
+(15, 'fks01', 'kesehatan masyarakat', '100', 123, 1111, 123, '21', '2020-07-25', '0000-00-00', 1, 0, 0, 0, 0),
 (16, 'fks01', 'kesehatan masyarakat', '2020', 500, 250, 250, '21', '2020-07-25', '0000-00-00', 1, 0, 0, 0, 0);
 
 -- --------------------------------------------------------
@@ -275,7 +275,8 @@ INSERT INTO `mahasiswa_seleksi_tabel` (`id_mhs_seleksi`, `prodi_kode`, `tahun_ak
 (1, 'ft01', '2244', 4535, 57, 57, 57, 900, 886, 55, '21', '2020-07-19', '0000-00-00', 1, 0, 0, 0),
 (2, 'ft01', '2001', 123, 333, 231, 443, 43, 78, 8, '21', '2020-07-20', '0000-00-00', 1, 0, 0, 0),
 (3, 'ft01', '2009', 32, 676, 868, 68, 6, 868, 86, '21', '2020-07-20', '0000-00-00', 1, 0, 0, 0),
-(4, 'ft01', '3232', 232, 879, 97, 97, 97, 979, 7, '21', '2020-07-20', '0000-00-00', 1, 0, 0, 0);
+(4, 'ft01', '3232', 232, 879, 97, 97, 97, 979, 7, '21', '2020-07-20', '0000-00-00', 1, 0, 0, 0),
+(8, 'ti01', '2019', 150, 23, 23, 12, 22, 13, 23, '22', '2020-08-01', '0000-00-00', 1, 0, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -483,11 +484,23 @@ CREATE TABLE `relasi_ks` (
 --
 
 INSERT INTO `relasi_ks` (`id_relasiks`, `kerjasama_id`, `kegiatanks_id`, `created_at`, `updated_at`) VALUES
-(4, 9, 1, '2020-07-23', NULL),
-(5, 9, 3, '2020-07-23', NULL),
-(6, 9, 4, '2020-07-23', NULL),
+(4, 8, 1, '2020-07-23', NULL),
+(5, 8, 3, '2020-07-23', NULL),
+(6, 7, 4, '2020-07-23', NULL),
 (7, 12, 2, '2020-07-23', NULL),
-(8, 12, 3, '2020-07-23', NULL);
+(8, 12, 3, '2020-07-23', NULL),
+(9, 13, 2, '2020-07-26', NULL),
+(10, 13, 4, '2020-07-26', NULL),
+(11, 14, 2, '2020-07-26', NULL),
+(12, 14, 3, '2020-07-26', NULL),
+(13, 15, 3, '2020-07-26', NULL),
+(14, 15, 4, '2020-07-26', NULL),
+(15, 16, 2, '2020-07-26', NULL),
+(16, 17, 2, '2020-07-26', NULL),
+(17, 17, 4, '2020-07-26', NULL),
+(18, 18, 2, '2020-07-30', NULL),
+(19, 18, 3, '2020-07-30', NULL),
+(20, 19, 3, '2020-08-01', NULL);
 
 -- --------------------------------------------------------
 
@@ -743,7 +756,7 @@ ALTER TABLE `jabatabanak_tabel`
 -- AUTO_INCREMENT for table `kerjasama_tabel`
 --
 ALTER TABLE `kerjasama_tabel`
-  MODIFY `id_kerjasama` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id_kerjasama` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `kriteria_tabel`
@@ -761,7 +774,7 @@ ALTER TABLE `mahasiswa_asing_tabel`
 -- AUTO_INCREMENT for table `mahasiswa_seleksi_tabel`
 --
 ALTER TABLE `mahasiswa_seleksi_tabel`
-  MODIFY `id_mhs_seleksi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id_mhs_seleksi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `matakuliah_table`
@@ -827,7 +840,7 @@ ALTER TABLE `relasimk_dosen`
 -- AUTO_INCREMENT for table `relasi_ks`
 --
 ALTER TABLE `relasi_ks`
-  MODIFY `id_relasiks` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id_relasiks` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `sitasidosen_tabel`

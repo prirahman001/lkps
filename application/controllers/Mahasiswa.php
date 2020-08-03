@@ -16,11 +16,12 @@ class Mahasiswa extends CI_Controller
     public function index()
     {
       if ($this->session->userdata('level_login')== 2) {
-        $data['list_data']=$this->general_model->getData('mahasiswa_asing_tabel');
+        $data['list_data']=$this->general_model->getData('Mahasiswa_seleksi_tabel');
       }
       else {
-        $data['list_data']=$this->general_model->getwhere('mahasiswa_asing_tabel','prodi_kode',$this->session->userdata('prodi_login'))->result();
+        $data['list_data']=$this->general_model->getwhere('Mahasiswa_seleksi_tabel','prodi_kode',$this->session->userdata('prodi_login'))->result();
       }
+
       // $data['list_data']=$this->general_model->getData('Mahasiswa_seleksi_tabel');
       $data['title']='Mahasiswa';
 
@@ -36,7 +37,7 @@ class Mahasiswa extends CI_Controller
       <script src="'.base_url().'assets/js/datatable.js"></script>';
 
       $this->template->load('template/templates', 'Mahasiswa/list_mhs',$data);
-
+      // print_r($data);
     }
     public function add_mhs()
     {
@@ -82,10 +83,30 @@ class Mahasiswa extends CI_Controller
           if ($this->session->userdata('level_login') == 2) {
             $data = array('lpm_status' => 1);
           }
+          if ($this->session->userdata('level_login') == 1) {
+            $data = array('lpm_status' => 1);
+          }
 
             $this->general_model->update_data('Mahasiswa_seleksi_tabel', $data, $where);
             redirect('mahasiswa');
         }
+
+        public function disapprovemhs($id)
+        {
+          $where = array('id_mhs_seleksi' => $id );
+          if ($this->session->userdata('level_login') == 4) {
+            $data = array('tu_status' => 2);
+          }
+          if ($this->session->userdata('level_login') == 3) {
+            $data = array('gkm_status' => 2);
+          }
+          if ($this->session->userdata('level_login') == 2) {
+            $data = array('gpm_status' => 2);
+          }
+            $this->general_model->update_data('Mahasiswa_seleksi_tabel', $data, $where);
+            redirect('mahasiswa');
+          }
+
 
 
         // MAHASISWA ASING
@@ -126,7 +147,13 @@ class Mahasiswa extends CI_Controller
     {
         $data = $this->input->post();
         // print_r($data);
-        $this->general_model->insert_data('mahasiswa_asing_tabel', $data);
+        $id_mahasiswa = $this->input->post('id_mhs_asing');
+        if ($id_mahasiswa) {
+          $this->general_model->update_data('mahasiswa_asing_tabel', $data, "id_mhs_asing= $id_mahasiswa");
+          // code...
+        }else{
+          $this->general_model->insert_data('mahasiswa_asing_tabel', $data);
+        }
         redirect('mahasiswa/mahasiswa_asing');
     }
 
@@ -142,9 +169,28 @@ class Mahasiswa extends CI_Controller
       if ($this->session->userdata('level_login') == 2) {
         $data = array('lpm_status' => 1);
       }
+      if ($this->session->userdata('level_login') == 1) {
+        $data = array('dekan_status' => 1);
+      }
         $this->general_model->update_data('Mahasiswa_seleksi_tabel', $data, $where);
         redirect('mahasiswa');
     }
+
+    public function disapproveasing($id)
+    {
+      $where = array('id_mhs_asing' => $id );
+      if ($this->session->userdata('level_login') == 4) {
+        $data = array('tu_status' => 2);
+      }
+      if ($this->session->userdata('level_login') == 3) {
+        $data = array('gkm_status' => 2);
+      }
+      if ($this->session->userdata('level_login') == 2) {
+        $data = array('gpm_status' => 2);
+      }
+      $this->general_model->update_data('mahasiswa_asing_tabel', $data, $where);
+        redirect('Mahasiswa/disapproveasing');
+      }
 
     public function edit_data_asing($id)
     {

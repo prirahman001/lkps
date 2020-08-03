@@ -33,15 +33,17 @@
                       <div class="col-sm-12">
 
                         <form action="<?php echo base_url() ?>kerjasama/simpan_data" method="post">
+                          <input type="hidden" name="id_kerjasama" value="<?=isset($list_ks->id_kerjasama) ? $list_ks->id_kerjasama: ''?>">
+
                           <div class="form-group">
                               <div class="form-line">
-                                  <input type="text" name="nama_lembaga" class="form-control" placeholder="Lembaga Mitra" />
+                                  <input type="text" value="<?=isset($list_ks->nama_lembaga) ? $list_ks->nama_lembaga : ''?>" name="nama_lembaga" class="form-control" placeholder="Lembaga Mitra" />
                               </div>
                           </div>
 
                           <div class="form-group">
                               <div class="form-line">
-                                  <input type="text" name="lokasi_ks" class="form-control" placeholder="Lokasi" />
+                                  <input type="text" value="<?=isset($list_ks->lokasi_ks) ? $list_ks->lokasi_ks : ''?>" " name="lokasi_ks" class="form-control" placeholder="Lokasi" />
                               </div>
                           </div>
 
@@ -50,7 +52,11 @@
                             <div class="col-sm-3 col-lg-3">
                                   <p>
                                     <label>
-                                        <input value ="1"  name="ting_internasional" type="checkbox"  style="margin-top:5px"/>
+                                        <input value ="1" <?php
+                                        if (isset($list_ks)) {
+                                          $list_ks->ting_internasional== 1 ? 'checked' : '';
+                                        }
+                                        ?> name="ting_internasional" type="checkbox"  style="margin-top:5px"/>
                                         <span>Internasional</span>
                                     </label>
                                   </p>
@@ -58,7 +64,11 @@
                             <div class="col-sm-3 col-lg-3">
                                 <p>
                                     <label>
-                                        <input value="1" name="ting_nasional" type="checkbox"  style="margin-top:5px"/>
+                                        <input value="1" <?php
+                                        if (isset($list_ks)) {
+                                          $list_ks->ting_nasional== 1 ? 'checked' : '';
+                                        }
+                                        ?> name="ting_nasional" type="checkbox"  style="margin-top:5px"/>
                                         <span>Nasional</span>
                                     </label>
                                 </p>
@@ -66,7 +76,11 @@
                             <div class="col-sm-3 col-lg-3">
                                 <p>
                                     <label>
-                                        <input value="1" name="ting_lokal" type="checkbox"  style="margin-top:5px"/>
+                                        <input value="1" <?php
+                                        if (isset($list_ks)) {
+                                          $list_ks->ting_lokal== 1 ? 'checked' : '';
+                                        }
+                                        ?> name="ting_lokal" type="checkbox"  style="margin-top:5px"/>
                                         <span>Lokal</span>
                                     </label>
                                 </p>
@@ -75,11 +89,11 @@
 
                           <div class="form-group">
                               <div class="form-line">
-                                  <input type="text" name="judul_kegiatanks" class="form-control" placeholder="Judul Kegiatan" />
+                                  <input type="text" value="<?=isset($list_ks->judul_kegiatanks) ? $list_ks->judul_kegiatanks : ''?>" name="judul_kegiatanks" class="form-control" placeholder="Judul Kegiatan" />
                               </div>
                               <br>
                               <div class="form-line">
-                                  <textarea rows="4" name="manfaat_ks" class="form-control no-resize" placeholder="Manfaat Bagi PS Diakreditasi..."></textarea>
+                                  <textarea rows="4" name="manfaat_ks" class="form-control no-resize" placeholder="Manfaat Bagi PS Diakreditasi..."><?=isset($list_ks->manfaat_ks) ? $list_ks->manfaat_ks : ''?></textarea>
                               </div>
                           </div>
 
@@ -88,7 +102,7 @@
                                   <div class="form-group">
                                       <div class="form-line">
                                         <p class="card-inside-title"> Tanggal Awal kerjasma</p>
-                                          <input type="date" name="awal_ks" class="datepicker form-control" placeholder="Please choose a date...">
+                                          <input type="date" value="<?=isset($list_ks->awal_ks) ? $list_ks->awal_ks : ''?>" name="awal_ks" class="datepicker form-control" placeholder="Please choose a date...">
                                       </div>
                                   </div>
                               </div>
@@ -96,7 +110,7 @@
                                   <div class="form-group">
                                       <div class="form-line">
                                         <p class="card-inside-title">Tanggal Akhir kerjasama</p>
-                                          <input type="date" name="selesai_ks" class="datepicker form-control" placeholder="Please choose a date...">
+                                          <input type="date" value="<?=isset($list_ks->selesai_ks) ? $list_ks->selesai_ks : ''?>" name="selesai_ks" class="datepicker form-control" placeholder="Please choose a date...">
                                       </div>
                                   </div>
                               </div>
@@ -107,12 +121,31 @@
                                 <p>
                                     <b>Bentuk Kegiatan kerjasama</b>
                                 </p>
+                                <?php
+
+                                  $id_kerjasama = $this->uri->segment(3);
+                                  $this->db->select('*')->from('relasi_ks');
+                                  $this->db->join('bntkegiatan_ks','bntkegiatan_ks.id_kegiatanks=relasi_ks.kegiatanks_id','left');
+                                  $this->db->where('kerjasama_id', $id_kerjasama);
+                                  $list_kegiatannya =$this->db->get()->result();
+                                  foreach ($list_kegiatannya as $e) {
+                                    $kegiatan[$e->id_kegiatanks] = $e->id_kegiatanks;
+                                  }
+
+                                 ?>
                                 <div class="form-group default-select">
-                                    <select class="form-control select2" name="bntkegiatan_ks[]" multiple="true" data-placeholder="Select">
+                                    <select class="form-control select2 pilihankegaiatan"  name="bntkegiatan_ks[]" multiple="true" data-placeholder="Select">
                                         <option value="" ></option>
                                         <?php
-                                        foreach ($kegiatan_ks as $key) {?>
-                                          <option value="<?= $key->id_kegiatanks ?>"><?php echo $key->nama_kegiatanks ?></option>
+
+                                        foreach ($kegiatan_ks as $key) {
+                                          if ($kegiatan[$key->id_kegiatanks]) {
+                                            $pilihlah = 'selected';
+                                          }else{
+                                            $pilihlah = '';
+                                          }
+                                          ?>
+                                          <option value="<?= $key->id_kegiatanks ?>" <?= $pilihlah ?>><?php echo $key->nama_kegiatanks ?></option>
                                         <?php }
                                          ?>
                                     </select>
@@ -128,14 +161,14 @@
                                 <div class="form-group default-select">
                                     <select class="form-control select2" name="jenispatner_ks" data-placeholder="Select">
                                         <option></option>
-                                        <option value="Dunia Usaha DN">Dunia Usaha DN</option>
-                                        <option value="Dunia Usaha LN">Dunia Usaha LN</option>
-                                        <option value="Institusi Pemerintah DN">Institusi Pemerintah DN</option>
-                                        <option value="Institusi Pemerintah LN">Institusi Pemerintah LN</option>
-                                        <option value="Institusi Pedididkan DN">Institusi Pedididkan DN</option>
-                                        <option value="Institusi Pedididkan LN">Institusi Pedididkan LN</option>
-                                        <option value="Organisai DN">Organisai DN</option>
-                                        <option value="Organisasi LN">Organisasi LN</option>
+                                        <option value="Dunia Usaha DN" <?=isset($list_ks->jenispatner_ks) && $list_ks->jenispatner_ks == "Dunia Usaha DN" ? 'selected' : ''?>>Dunia Usaha DN</option>
+                                        <option value="Dunia Usaha LN" <?=isset($list_ks->jenispatner_ks) && $list_ks->jenispatner_ks == "Dunia Usaha LN" ? 'selected' : ''?>>Dunia Usaha LN</option>
+                                        <option value="Institusi Pemerintah DN"<?=isset($list_ks->jenispatner_ks) && $list_ks->jenispatner_ks == "Institusi Pemerintah DN" ? 'selected' : ''?>>Institusi Pemerintah DN</option>
+                                        <option value="Institusi Pemerintah LN" <?=isset($list_ks->jenispatner_ks) && $list_ks->jenispatner_ks == "Institusi Pemerintah LN" ? 'selected' : ''?>>Institusi Pemerintah LN</option>
+                                        <option value="Institusi Pedididkan DN" <?=isset($list_ks->jenispatner_ks) && $list_ks->jenispatner_ks == "Institusi Pedididkan DN" ? 'selected' : ''?>>Institusi Pedididkan DN</option>
+                                        <option value="Institusi Pedididkan LN" <?=isset($list_ks->jenispatner_ks) && $list_ks->jenispatner_ks == "Institusi Pedididkan LN" ? 'selected' : ''?>>Institusi Pedididkan LN</option>
+                                        <option value="Organisai DN" <?=isset($list_ks->jenispatner_ks) && $list_ks->jenispatner_ks == "Organisasi DN" ? 'selected' : ''?>>Organisai DN</option>
+                                        <option value="Organisasi LN" <?=isset($list_ks->jenispatner_ks) && $list_ks->jenispatner_ks == "Organisasi LN" ? 'selected' : ''?>>Organisasi LN</option>
                                     </select>
                                 </div>
                             </div>
@@ -146,9 +179,9 @@
                                 <div class="form-group default-select">
                                     <select class="form-control select2" name="bukti_ks" placeholder="Select">
                                         <option></option>
-                                        <option value="Implementations Agreement">Implementations Agreement</option>
-                                        <option value="MoU">Mou</option>
-                                        <option value="MoA">MoA</option>
+                                        <option value="Implementations Agreement" <?=isset($list_ks->bukti_ks) && $list_ks->bukti_ks == "Implementations Agreement" ? 'selected' : ''?>>Implementations Agreement</option>
+                                        <option value="MoU" <?=isset($list_ks->bukti_ks) && $list_ks->bukti_ks == "MoU" ? 'selected' : ''?>>Mou</option>
+                                        <option value="MoA" <?=isset($list_ks->bukti_ks) && $list_ks->bukti_ks == "MoA" ? 'selected' : ''?>>MoA</option>
                                         </select>
                                 </div>
                               </div>
@@ -159,6 +192,7 @@
                                           <input type="file" multiple>
                                           <input type="hidden" id="text-input" value="1" name="kriteria_kode">
                                           <input type="hidden" id="text-input" value="<?php echo $this->session->userdata('prodi_login')?>" name="prodi_kode">
+                                          <input type="hidden" id="text-input" value="1" name="tu_status">
                                       </div>
                                       <div class="file-path-wrapper">
                                           <input class="file-path validate" type="text" placeholder="Upload one or more files">

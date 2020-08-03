@@ -1,8 +1,4 @@
-<style >
-  .kembalikan{
-    cursor: not-allowed !important;
-  }
-</style>
+
 <div class="block-header">
     <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
@@ -68,41 +64,53 @@
                                   <?php
                                   if ($data == 5) {
                                     if ($key->tu_status == 1) {
-                                      echo "Data Terkirim";
+                                      echo "Sedang Ditinjau GKM";
+                                    }
+                                    elseif ($key->tu_status == 2) {
+                                      echo "Mohon Diperbaiki";
                                     }
                                   }
+                                  // GPM
                                   if ($data == 4) {
                                     if ($key->gkm_status == 0) {
-                                      echo "Perlu Peninjauan";
+                                      echo "Belum Diverifikasi";
                                     }
                                     elseif ($key->gkm_status == 1) {
-                                      echo "Data Dikirim ke GPM";
+                                      echo "Sedang Ditinjau GPM";
                                     }
                                     elseif ($key->gkm_status == 2) {
-                                      echo "Data Dikembalikan";
+                                      echo "Tidak Setujui Oleh GPM";
                                     }
                                   }
+                                  // GPM
                                   if ($data == 3) {
                                     if ($key->gpm_status == 0) {
-                                      echo "Perlu Peninjauan";
+                                      echo "Belum Diverifikasi";
                                     }
                                     elseif ($key->gpm_status == 1) {
-                                      echo "Data Dikirim ke LPM";
+                                      echo "Sedang Ditinjau GPM";
                                     }
                                     elseif ($key->gpm_status == 2) {
-                                      echo "Data Dikembalikan";
+                                      echo "Tidak Setujui Oleh LPM";
                                     }
                                   }
+                                  // LPM
                                   if ($data == 2) {
                                     if ($key->lpm_status == 0) {
-                                      echo "Perlu Peninjauan";
+                                      echo "Belum Diverifikasi";
                                     }
                                     elseif ($key->lpm_status == 1) {
-                                      echo "Data Dikirim ke Dekan";
+                                      echo "Terkirim Kepada Dekan Fakultas";
                                     }
-                                    elseif ($key->lpm_status == 2) {
-                                      echo "Data Dikembalikan";
+                                    // elseif ($key->lpm_status == 2) {
+                                    //   echo "Dikembalikan";
+                                    // }
+                                  }
+                                  if ($data == 1) {
+                                    if ($key->gpm_status == 0) {
+                                      echo "Complete";
                                     }
+
                                   }
                                    ?>
                                 </td>
@@ -115,19 +123,20 @@
                                 <?php if ($data == 4) { ?>
                                   <!-- Approve -->
                                   <?php if($key->gkm_status== 0){?>
-                                  <a class="btn btn-success" href="<?php echo base_url().'mahasiswa/Approvemhs'.$key->id_kerjasama?>">Approve</a>
+                                  <a class="btn btn-success" href="<?php echo base_url().'mahasiswa/approvemhs'.$key->id_mhs_seleksi?>">Approve</a> <br>
+                                  <a class="btn btn-danger" style="margin-top:5px" href="#">Disapprove</a>
                                 <?php } ?>
-                                  <a class="btn btn-danger <?php echo ($key->gkm_status == 1 ? 'kembalikan':''); ?>" style="margin-top:10px;" href="#">Kembalikan</a>
+                                  <!-- <a class="btn btn-danger <?php echo ($key->gkm_status == 1 ? 'kembalikan':''); ?>" style="margin-top:10px;" href="#">Kembalikan</a> -->
                                 <?php }?>
 
                                 <?php if ($data == 3) { ?>
-                                  <a class="btn btn-success" href="<?php echo base_url().'mahasiswa/Approvemhs'.$key->id_kerjasama?>">Approve</a>
-                                  <a class="btn btn-danger" style="margin-top:10px" href="#">Kembalikan</a>
+                                  <a class="btn btn-success" href="<?php echo base_url().'mahasiswa/approvemhs'.$key->id_mhs_seleksi?>">Approve</a>
+                                  <a class="btn btn-danger" style="margin-top:10px" href="#">Disapprove</a>
                                 <?php }?>
 
                                 <?php if ($data == 2) { ?>
-                                  <a class="btn btn-success" href="<?php echo base_url().'mahasiswa/Approvemhs'.$key->id_kerjasama?>">Approve</a>
-                                  <a class="btn btn-danger" style="margin-top:10px" href="#">Kembalikan</a>
+                                  <a class="btn btn-success" href="<?php echo base_url().'mahasiswa/approvemhs'.$key->id_mhs_seleksi?>">Approve</a>
+                                  <a class="btn btn-danger" style="margin-top:10px;" href="#">Disapprove</a>
                                 <?php }?>
                                 </td>
                             </tr>
@@ -139,18 +148,3 @@
         </div>
     </div>
 </div>
-
-<script>
-  window.onload = function() {
-      var anchors = document.getElementsByClassName('kembalikan');
-      for(var i = 0; i < anchors.length; i++) {
-          var anchor = anchors[i];
-          anchor.onclick = function(e) {
-              e.preventDefault();
-          }
-      }
-  }
-  // getElementsByClassName('kembalikan').on('click',function(){
-  //   console.log('hahahahahaahahahahahahahaah');
-  // })
-</script>

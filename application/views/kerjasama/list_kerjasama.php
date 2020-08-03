@@ -1,8 +1,3 @@
-<style >
-  .kembalikan{
-    cursor: not-allowed !important;
-  }
-</style>
 <div class="block-header">
     <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
@@ -47,14 +42,20 @@
                               <th>Manfaat bagi PS yang Diakreditasi</th>
                               <th>Waktu dan Durasi</th>
                               <th>Bukti Kerjasama</th>
-                              <th>Bentuk Kerjasama</th>
+                              <th width="10%">Bentuk Kerjasama</th>
                               <th>Jenis Patner</th>
                               <th>Status Verifikasi</th>
                               <th>Action</th>
                           </tr>
                         </thead>
                         <tbody>
-                          <?php $no=1; foreach ($list_data as $key) { ?>
+                          <?php $no=1; foreach ($list_data as $key) {
+                            // echo $key->id_kerjasama."<br>";
+                              $this->db->where('kerjasama_id',$key->id_kerjasama);
+                              $datarelasi = $this->db->get('relasi_ks')->result();
+
+
+                            ?>
 
 
                               <tr>
@@ -68,75 +69,125 @@
                                 <td><?=$key->manfaat_ks?></td>
                                 <td><?=$key->awal_ks.' - '.$key->selesai_ks?></td>
                                 <td><?=$key->bukti_ks?></td>
+
                                 <td>
-                                  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#basicModal">Lihat</button>
-                                </td>
+                                <ol>
+                                  <?php
+                                foreach ($datarelasi as $k) {
+                                    $this->db->where('id_kegiatanks', $k->kegiatanks_id);
+                                    $datasubkegitan = $this->db->get('bntkegiatan_ks')->result();
+                                    foreach ($datasubkegitan as $e) {
+                                      echo "
+                                          <li>".$e->nama_kegiatanks."</li>
+
+                                      ";
+                                    }
+
+                                }
+                                 ?>
+                               </ol>
+                               </td>
+
                                 <td><?=$key->jenispatner_ks?></td>
 
                                 <td>
                                   <?php
                                   if ($data == 5) {
                                     if ($key->tu_status == 1) {
-                                      echo "Data Terkirim";
+                                      echo "Sedang Ditinjau GKM";
+                                    }
+                                    elseif ($key->tu_status == 2) {
+                                      echo "Mohon Diperbaiki";
                                     }
                                   }
+                                  // GKM
                                   if ($data == 4) {
                                     if ($key->gkm_status == 0) {
-                                      echo "Perlu Peninjauan";
+                                      echo "Belum Diverifikasi";
                                     }
                                     elseif ($key->gkm_status == 1) {
-                                      echo "Data Dikirim ke GPM";
+                                      echo "Sedang Ditinjau GPM";
                                     }
                                     elseif ($key->gkm_status == 2) {
-                                      echo "Data Dikembalikan";
+                                      echo "Tidak Setujui Oleh GPM";
+                                    }
+                                    elseif ($key->gpm_status == 4) {
+                                      echo "Dikembalikan Kepada TU";
                                     }
                                   }
+                                  // GPM
                                   if ($data == 3) {
                                     if ($key->gpm_status == 0) {
-                                      echo "Perlu Peninjauan";
+                                      echo "Belum Diverifikasi";
                                     }
                                     elseif ($key->gpm_status == 1) {
-                                      echo "Data Dikirim ke LPM";
+                                      echo "Sedang Ditinjau LPM";
                                     }
                                     elseif ($key->gpm_status == 2) {
-                                      echo "Data Dikembalikan";
+                                      echo "Tidak Setujui Oleh LPM";
+                                    }
+                                    elseif ($key->gpm_status == 4) {
+                                      echo "Dikembalikan Kepada GKM";
                                     }
                                   }
+                                  // LPM
                                   if ($data == 2) {
                                     if ($key->lpm_status == 0) {
-                                      echo "Perlu Peninjauan";
+                                      echo "Belum Diverifikasi";
                                     }
                                     elseif ($key->lpm_status == 1) {
-                                      echo "Data Dikirim ke Dekan";
+                                      echo "Terkirim Kepada Dekan Fakultas";
                                     }
-                                    elseif ($key->lpm_status == 2) {
-                                      echo "Data Dikembalikan";
+                                    elseif ($key->gpm_status == 2) {
+                                      echo "Tidak Disetujui";
                                     }
+                                    // elseif ($key->lpm_status == 2) {
+                                    //   echo "Dikembalikan";
+                                    // }
+                                  }
+                                  if ($data == 1) {
+                                    if ($key->gpm_status == 0) {
+                                      echo "Complete";
+                                    }
+
                                   }
                                    ?>
                                 </td>
                                 <td>
                                 <?php if ($data == 5) { ?>
-                                  <button type="button" class="btn btn-primary" href="#">Update</button>
-                                  <button type="button" class="btn btn-danger" style="margin-top:10px" href="#">delete</button>
+                                  <a class="btn btn-primary" href="<?=base_url().'kerjasama/edit_data/'.$key->id_kerjasama?>">Update</a> <br>
+                                  <a onClick="return confirm('Anda yakin ingin menghapus data ini?')" class="btn btn-danger" style="margin-Top:5px" href="<?= base_url().'kerjasama/hapus_data/'.$key->id_kerjasama?>">delete</a>
                                 <?php }?>
                                 <!-- punya GKM -->
                                 <?php if ($data == 4) { ?>
                                   <!-- Approve -->
                                   <?php if($key->gkm_status== 0){?>
                                   <a class="btn btn-success" href="<?php echo base_url().'kerjasama/aproveKerjaSama/'.$key->id_kerjasama?>">Approve</a>
+                                  <a class="btn btn-danger" style="margin-top:5px" href="<?php echo base_url().'kerjasama/kembalikanks/'.$key->id_kerjasama?>">Disapprove</a>
+                                  <?php } ?>
+                                  <?php if ($key->gpm_status== 2) { ?>
+                                  <a class="btn btn-danger" style="margin-top:5px" href="<?php echo base_url().'kerjasama/kembalikanks/'.$key->id_kerjasama?>">Disapprove</a>
+                                  <?php } ?>
                                 <?php } ?>
-                                  <a class="btn btn-danger <?php echo ($key->gkm_status == 1 ? 'kembalikan':''); ?>" style="margin-top:10px;" href="#">Kembalikan</a>
-                                <?php }?>
 
                                 <?php if ($data == 3) { ?>
+                                  <?php if($key->gpm_status== 0){?>
                                   <a class="btn btn-success" href="<?php echo base_url().'kerjasama/aproveKerjaSama/'.$key->id_kerjasama?>">Approve</a>
-                                  <a class="btn btn-danger" style="margin-top:10px" href="#">Kembalikan</a>
+                                  <a class="btn btn-danger" style="margin-top:5px" href="<?php echo base_url().'kerjasama/kembalikanks/'.$key->id_kerjasama?>">Disapprove</a>
+                                  <?php } ?>
+                                  <?php if ($key->gpm_status== 2) { ?>
+                                  <a class="btn btn-danger" style="margin-top:5px" href="<?php echo base_url().'kerjasama/kembalikanks/'.$key->id_kerjasama?>">Disapprove</a>
+                                  <?php } ?>
                                 <?php }?>
 
                                 <?php if ($data == 2) { ?>
+                                  <?php if($key->lpm_status== 0){?>
                                   <a class="btn btn-success" href="<?php echo base_url().'kerjasama/aproveKerjaSama/'.$key->id_kerjasama?>">Approve</a>
-                                  <a class="btn btn-danger" style="margin-top:10px" href="#">Kembalikan</a>
+                                  <a class="btn btn-danger" style="margin-top:5px" href="<?php echo base_url().'kerjasama/kembalikanks/'.$key->id_kerjasama?>">Disapprove</a>
+                                  <?php } ?>
+                                  <?php if ($key->lpm_status== 2) { ?>
+                                  <a class="btn btn-danger" style="margin-top:5px" href="<?php echo base_url().'kerjasama/kembalikanks/'.$key->id_kerjasama?>">Disapprove</a>
+                                  <?php } ?>
                                 <?php }?>
                                 </td>
                             </tr>
@@ -148,41 +199,3 @@
         </div>
     </div>
 </div>
-
-<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
-    <div class="modal fade" id="basicModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    Content goes here..
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-info waves-effect">Save</button>
-                    <button type="button" class="btn btn-danger waves-effect"
-                        data-dismiss="modal">Cancel</button>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<script>
-  window.onload = function() {
-      var anchors = document.getElementsByClassName('kembalikan');
-      for(var i = 0; i < anchors.length; i++) {
-          var anchor = anchors[i];
-          anchor.onclick = function(e) {
-              e.preventDefault();
-          }
-      }
-  }
-
-
-</script>

@@ -448,6 +448,7 @@
       echo $js;
     }
      ?>
+     
 </body>
 
 <!-- Mirrored from www.radixtouch.in/templates/admin/lorax/source/light/pages/examples/blank.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 15 Nov 2019 17:15:16 GMT -->

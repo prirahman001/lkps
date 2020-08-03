@@ -70,6 +70,11 @@ class general_model extends CI_Model
         $this->db->delete($table);
 
       }
+      function getjoin($query){
+        return $this->db->query($query);
+        // $data = $this->db->get();
+         // $data;
+      }
 
 }
  ?>

@@ -1,8 +1,4 @@
-<style >
-  .kembalikan{
-    cursor: not-allowed !important;
-  }
-</style>
+
 <div class="block-header">
     <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
@@ -45,6 +41,9 @@
                             <th>Jumlah Mahasiswa Asing</th>
                             <th>Jumlah Mahasiswa Asing Full-Time</th>
                             <th>Jumlah Mahasiswa Asing Part-Time</th>
+                            <th>Status</th>
+                            <th>Action</th>
+
                           </tr>
                         </thead>
                         <tbody>
@@ -107,19 +106,21 @@
                                 <?php if ($data == 4) { ?>
                                   <!-- Approve -->
                                   <?php if($key->gkm_status== 0){?>
-                                  <a class="btn btn-success" href="<?php echo base_url().'mahasiswa/approvemhs_asing'.$key->id_kerjasama?>">Approve</a>
-                                <?php } ?>
-                                  <a class="btn btn-danger <?php echo ($key->gkm_status == 1 ? 'kembalikan':''); ?>" style="margin-top:10px;" href="#">Kembalikan</a>
+                                  <a class="btn btn-success" href="<?php echo base_url().'mahasiswa/approvemhs_asing'.$key->id_mhs_asing?>">Approve</a>
+                                  <a class="btn btn-danger" style="margin-top:5px" href="#">Disapprove</a>
+                                <?php }?>
+
+                                  <!-- <a class="btn btn-danger <?php echo ($key->gkm_status == 1 ? 'Disapprove':''); ?>" style="margin-top:5px;" href="#">Disapprove</a> -->
                                 <?php }?>
 
                                 <?php if ($data == 3) { ?>
-                                  <a class="btn btn-success" href="<?php echo base_url().'mahasiswa/approvemhs_asing'.$key->id_kerjasama?>">Approve</a>
-                                  <a class="btn btn-danger" style="margin-top:10px" href="#">Kembalikan</a>
+                                  <a class="btn btn-success" href="<?php echo base_url().'mahasiswa/approvemhs_asing'.$key->id_mhs_asing?>">Approve</a>
+                                  <a class="btn btn-danger" style="margin-top:5px" href="#">Disapprove</a>
                                 <?php }?>
 
                                 <?php if ($data == 2) { ?>
-                                  <a class="btn btn-success" href="<?php echo base_url().'mahasiswa/approvemhs_asing'.$key->id_kerjasama?>">Approve</a>
-                                  <a class="btn btn-danger" style="margin-top:10px" href="#">Kembalikan</a>
+                                  <a class="btn btn-success" href="<?php echo base_url().'mahasiswa/approvemhs_asing'.$key->id_mhs_asing?>">Approve</a>
+                                  <a class="btn btn-danger" style="margin-top:5px" href="#">Disapprove</a>
                                 <?php }?>
                                 </td>
                             </tr>
@@ -131,62 +132,3 @@
         </div>
     </div>
 </div>
-
-<script>
-  window.onload = function() {
-      var anchors = document.getElementsByClassName('kembalikan');
-      for(var i = 0; i < anchors.length; i++) {
-          var anchor = anchors[i];
-          anchor.onclick = function(e) {
-              e.preventDefault();
-          }
-      }
-  }
-  // getElementsByClassName('kembalikan').on('click',function(){
-  //   console.log('hahahahahaahahahahahahahaah');
-  // })
-</script>
-
-<!-- <div class="content">
-    <div class="animated fadeIn">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="card">
-                    <div class="card-header">
-                        <strong class="card-title">Data Kualitas Input Mahasiswa</strong>
-                    </div>
-                    <div class="card-body">
-                      <a  href="<?php echo base_url().'mahasiswa/add_mhs'?>" class ="btn btn-success float-right" >Tambah data</a>
-                      <br> <br>
-                        <table id="bootstrap-data-table " class="table table-striped table-bordered data">
-                            <thead>
-                                <tr>
-                                    <th>No</th>
-                                    <th>Program Studi</th>
-                                    <th>Jumlah Mahasiswa Asing</th>
-                                    <th>Jumlah Mahasiswa Asing Full-Time</th>
-                                    <th>Jumlah Mahasiswa Asing Part-Time</th>
-                                    </tr>
-                            </thead>
-                            <tbody>
-                              <?php $no=1; foreach ($list_data as $key) { ?>
-                                  <tr>
-                                    <td><?=$no++?></td>
-                                    <td><?=$key->tahun_akademik?></td>
-                                    <td><?=$key->daya_tampung?></td>
-                                    <td><?=$key->pendaftar_msh?></td>
-                                    <td><?=$key->pendaftar_msh?></td>
-                                    <td>
-                                      <a class="btn btn-primary" href="#">Update</a>
-                                      <a class="btn btn-danger" style="margin-top:10px" href="#">delete</a>
-                                    </td>
-                                </tr>
-                                <?php } ?>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div><!-- .animated -->
-</div><!-- .content --> -->
