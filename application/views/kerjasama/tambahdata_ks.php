@@ -52,11 +52,7 @@
                             <div class="col-sm-3 col-lg-3">
                                   <p>
                                     <label>
-                                        <input value ="1" <?php
-                                        if (isset($list_ks)) {
-                                          $list_ks->ting_internasional== 1 ? 'checked' : '';
-                                        }
-                                        ?> name="ting_internasional" type="checkbox"  style="margin-top:5px"/>
+                                        <input value ="1" <?= $list_ks->ting_internasional== 1 ? 'checked' : ''?> name="ting_internasional" type="checkbox"  style="margin-top:5px"/>
                                         <span>Internasional</span>
                                     </label>
                                   </p>
@@ -64,11 +60,7 @@
                             <div class="col-sm-3 col-lg-3">
                                 <p>
                                     <label>
-                                        <input value="1" <?php
-                                        if (isset($list_ks)) {
-                                          $list_ks->ting_nasional== 1 ? 'checked' : '';
-                                        }
-                                        ?> name="ting_nasional" type="checkbox"  style="margin-top:5px"/>
+                                        <input value="1" <?= $list_ks->ting_nasional == 1 ? 'checked' : ''?> name="ting_nasional" type="checkbox"  style="margin-top:5px"/>
                                         <span>Nasional</span>
                                     </label>
                                 </p>
@@ -76,11 +68,7 @@
                             <div class="col-sm-3 col-lg-3">
                                 <p>
                                     <label>
-                                        <input value="1" <?php
-                                        if (isset($list_ks)) {
-                                          $list_ks->ting_lokal== 1 ? 'checked' : '';
-                                        }
-                                        ?> name="ting_lokal" type="checkbox"  style="margin-top:5px"/>
+                                        <input value="1" <?= $list_ks->ting_lokal == 1 ? 'checked' : ''?> name="ting_lokal" type="checkbox"  style="margin-top:5px"/>
                                         <span>Lokal</span>
                                     </label>
                                 </p>

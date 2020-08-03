@@ -54,7 +54,6 @@
                               $this->db->where('kerjasama_id',$key->id_kerjasama);
                               $datarelasi = $this->db->get('relasi_ks')->result();
 
-
                             ?>
 
 
