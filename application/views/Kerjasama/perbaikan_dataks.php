@@ -26,24 +26,24 @@
           <div class="card">
               <div class="header">
                   <h2>
-                      <strong>Tambah Tabel Kerjasama</h2>
+                      <strong> Perbaikan Tabel Kerjasama</h2>
               </div>
               <div class="body">
                   <div class="row clearfix">
                       <div class="col-sm-12">
 
-                        <form action="<?php echo base_url()?>kerjasama/simpan_data" method="post">
-                          <input type="hidden" name="id_kerjasama" value="<?=isset($list_ks->id_kerjasama) ? $list_ks->id_kerjasama: ''?>">
+                        <form action="<?php echo base_url()?>kerjasama/perbaiki" method="post">
+                          <input type="hidden" name="id_kerjasama" value="<?= $list_ks->id_kerjasama ?>">
                               <div class="form-group form-float">
                                   <div class="form-line">
-                                      <input type="text" name="nama_lembaga" class="form-control" value="<?=isset($list_ks->nama_lembaga) ? $list_ks->nama_lembaga : ''?>">
+                                      <input type="text" name="nama_lembaga" class="form-control" value="<?= $list_ks->nama_lembaga ?>">
                                       <label class="form-label">Nama Lembaga</label>
                                   </div>
                               </div>
 
                               <div class="form-group form-float">
                                   <div class="form-line">
-                                      <input type="text" name="lokasi_ks" class="form-control" value="<?=isset($list_ks->lokasi_ks) ? $list_ks->lokasi_ks : ''?>">
+                                      <input type="text" name="lokasi_ks" class="form-control" value="<?= $list_ks->lokasi_ks ?>">
                                       <label class="form-label">Lokasi</label>
                                   </div>
                               </div>

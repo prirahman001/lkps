@@ -28,9 +28,77 @@
             <div class="body">
               <?php $data = $this->session->userdata('level_login');
                 if ($data == 5) { ?>
-                  <a  href="<?php echo base_url().'mahasiswa/add_mhs_asing'?>" class ="btn btn-success float-right mr-5" >Tambah data</a>
+                  <a  href="<?php echo base_url().'mahasiswa/tambah_datamhsa'?>" class ="btn btn-success float-right mr-5" >Tambah data</a>
                 <?php }
                ?>
+
+               <!-- MODAL START -->
+                <div class="row clearfix js-sweetalert">
+                  <?php foreach ($list_data as $keymodal) { ?>
+                   <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                       <div class="modal fade" id="exampleModalCenter<?php echo $keymodal->id_mhs_asing ?>" tabindex="-1" role="dialog"
+                           aria-labelledby="formModal" aria-hidden="true">
+                           <div class="modal-dialog" role="document">
+                               <div class="modal-content">
+                                   <div class="modal-header">
+                                       <h5 class="modal-title" id="formModal">Keterangan Dikembalikan</h5>
+                                       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                           <span aria-hidden="true">&times;</span>
+                                       </button>
+                                   </div>
+                                   <div class="modal-body">
+                                       <form action="<?php echo base_url()?>mahasiswa/disapprovemhsasing" method="post">
+                                           <!-- <label for="email_address1">Email Address</label> -->
+                                           <div class="form-group">
+                                               <div class="form-line">
+                                                 <input type="hidden" name="id_mhs_asing" value="<?php echo $keymodal->id_mhs_asing ?>">
+                                                 <textarea name="ket_modal" placeholder="Masukan keterangan" rows="10"></textarea>
+
+                                               </div>
+                                           </div>
+                                           <!-- <br> -->
+                                   </div>
+                                   <div class="modal-footer">
+                                     <button type="submit" class="btn btn-info waves-effect">Kirim</button>
+                                     <!-- <button type="button" class="btn btn-primary m-t-15 waves-effect">Kirim</button> -->
+                                   </form>
+                                       <button type="button" class="btn btn-danger waves-effect"
+                                           data-dismiss="modal">Batal</button>
+                                   </div>
+                               </div>
+                           </div>
+                       </div>
+                   </div>
+
+                   <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                       <div class="modal fade" id="basicModal<?php echo $keymodal->id_mhs_asing ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                           aria-hidden="true">
+                           <div class="modal-dialog" role="document">
+                               <div class="modal-content">
+                                   <div class="modal-header">
+                                       <h5 class="modal-title" id="exampleModalLabel">Keterangan</h5>
+                                       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                           <span aria-hidden="true">&times;</span>
+                                       </button>
+                                   </div>
+                                   <div class="modal-body">
+                                     <p>
+                                       <?=$keymodal->keterangan?>
+                                    </p>
+                                   </div>
+                                   <div class="modal-footer">
+                                       <a href="<?=base_url().'mahasiswa/perbaikan_datamhsa/'.$keymodal->id_mhs_asing?>" class="btn btn-info waves-effect">Perbaiki</a>
+                                       <button type="button" class="btn btn-danger waves-effect"
+                                           data-dismiss="modal">batal</button>
+                                   </div>
+                               </div>
+                           </div>
+                       </div>
+                   </div>
+                 <?php } ?>
+                </div>
+                <!-- MODAL END -->
+
                 <div class="table-responsive">
                     <table id="tableExport" class="display table table-hover table-checkable order-column m-t-0 width-per-100">
                         <thead>
@@ -57,71 +125,57 @@
                                 <td><?=$key->jumlahmhspart_asing?></td>
                                 <td>
                                   <?php
-                                  if ($data == 5) {
-                                    if ($key->tu_status == 1) {
-                                      echo "Data Terkirim";
-                                    }
-                                  }
-                                  if ($data == 4) {
-                                    if ($key->gkm_status == 0) {
-                                      echo "Perlu Peninjauan";
-                                    }
-                                    elseif ($key->gkm_status == 1) {
-                                      echo "Data Dikirim ke GPM";
-                                    }
-                                    elseif ($key->gkm_status == 2) {
-                                      echo "Data Dikembalikan";
-                                    }
-                                  }
-                                  if ($data == 3) {
-                                    if ($key->gpm_status == 0) {
-                                      echo "Perlu Peninjauan";
-                                    }
-                                    elseif ($key->gpm_status == 1) {
-                                      echo "Data Dikirim ke LPM";
+                                  if ($key->gkm_status == 1){
+                                    $status = "Telah Disetujui GKM";
+                                    if ($key->gpm_status == 1) {
+                                      $status = "Selesai";
                                     }
                                     elseif ($key->gpm_status == 2) {
-                                      echo "Data Dikembalikan";
+                                      $status = "Dikembalikan Oleh GPM";
+                                    }
+                                    elseif ($key->gpm_status == 0) {
+                                      $status = "Telah Disetujui GKM Sedang Ditinjau GPM";
                                     }
                                   }
-                                  if ($data == 2) {
-                                    if ($key->lpm_status == 0) {
-                                      echo "Perlu Peninjauan";
-                                    }
-                                    elseif ($key->lpm_status == 1) {
-                                      echo "Data Dikirim ke Dekan";
-                                    }
-                                    elseif ($key->lpm_status == 2) {
-                                      echo "Data Dikembalikan";
-                                    }
+                                  elseif ($key->gkm_status == 2) {
+                                    $status = "Dikembalikan Oleh GKM";
                                   }
+                                  elseif ($key->gkm_status == 0) {
+                                    $status = "Sedang Ditinjau GKM";
+                                  }
+                                  echo $status;
                                    ?>
-                                </td>
+
+                                 </td>
                                 <td>
                                 <?php if ($data == 5) { ?>
-                                  <a class="btn btn-primary" href="<?=base_url().'mahasiswa/edit_data_asing/'.$key->id_mhs_asing?>">Update</a> <br>
-                                  <a onClick="return confirm('Anda yakin inggin menghapus data ini?')" class="btn btn-danger" style="margin-Top:5px" href="<?= base_url().'mahasiswa/hapus_data_asing/'.$key->id_mhs_asing?>">delete</a>
-                                <?php }?>
+                                  <a href="<?=base_url().'mahasiswa/edit_data_asing/'.$key->id_mhs_asing?>"><i class="fas fa-edit text-primary" style="font-size:20px;"></i></a> <br>
+
+                                  <a onClick="return confirm('Anda yakin inggin menghapus data ini?')"  style="margin-Top:5px" href="<?=base_url().'mahasiswa/hapus_data_asing/'.$key->id_mhs_asing?>"><i class="fas fa-trash text-danger" style="font-size:20px;"></i></a>
+
+                                  <?php if ($key->tu_status == 1) {?>
+                                  <a href="javascript:void(0)" data-toggle="modal" data-target="#basicModal<?php echo $key->id_mhs_asing ?>"><i class="material-icons">error</i></a>
+                                <?php }}?>
                                 <!-- punya GKM -->
                                 <?php if ($data == 4) { ?>
                                   <!-- Approve -->
-                                  <?php if($key->gkm_status== 0){?>
-                                  <a class="btn btn-success" href="<?php echo base_url().'mahasiswa/approvemhs_asing'.$key->id_mhs_asing?>">Approve</a>
-                                  <a class="btn btn-danger" style="margin-top:5px" href="#">Disapprove</a>
-                                <?php }?>
+                                  <?php if($key->gkm_status== 0  || $key->gkm_status == 3){?>
+                                  <a class="btn btn-success" href="<?=base_url().'mahasiswa/approvemhsasing/'.$key->id_mhs_asing?>">Approve</a> <br>
 
-                                  <!-- <a class="btn btn-danger <?php echo ($key->gkm_status == 1 ? 'Disapprove':''); ?>" style="margin-top:5px;" href="#">Disapprove</a> -->
-                                <?php }?>
+                                  <button type="button" name="button" class="btn btn-danger" style="margin-top:5px" data-toggle="modal" data-target="#exampleModalCenter<?php echo $key->id_mhs_asing ?>" >Disapprove</button>
+                                <?php } }?>
 
+
+                                <!-- APPROVE GPM -->
                                 <?php if ($data == 3) { ?>
-                                  <a class="btn btn-success" href="<?php echo base_url().'mahasiswa/approvemhs_asing'.$key->id_mhs_asing?>">Approve</a>
-                                  <a class="btn btn-danger" style="margin-top:5px" href="#">Disapprove</a>
-                                <?php }?>
+                                  <?php if($key->gkm_status== 0  || $key->gkm_status == 3){?>
+                                  <a class="btn btn-success" href="<?=base_url().'mahasiswa_asing/approvemhsasing/'.$key->id_mhs_asing?>">Approve</a> <br>
 
-                                <?php if ($data == 2) { ?>
-                                  <a class="btn btn-success" href="<?php echo base_url().'mahasiswa/approvemhs_asing'.$key->id_mhs_asing?>">Approve</a>
-                                  <a class="btn btn-danger" style="margin-top:5px" href="#">Disapprove</a>
-                                <?php }?>
+                                  <button type="button" name="button" class="btn btn-danger" style="margin-top:5px" data-toggle="modal" data-target="#exampleModalCenter<?php echo $key->id_mhs_asing ?>" >Disapprove</button>
+                                <?php } }?>
+
+                                <!-- APPROVE END -->
+
                                 </td>
                             </tr>
                             <?php } ?>

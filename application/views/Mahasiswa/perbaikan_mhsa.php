@@ -31,13 +31,13 @@
               <div class="body">
                   <div class="row clearfix">
                       <div class="col-sm-12">
-                        <form action="<?php echo base_url() ?>mahasiswa/simpan_data_asing" method="post">
-                          <input type="hidden" name="id_mhs_asing" value="<?= isset($list_mhs_asing->id_mhs_asing) ? $list_mhs_asing->id_mhs_asing : ''?>">
+                        <form action="<?php echo base_url() ?>mahasiswa/perbaiki_mhsa" method="post">
+                          <input type="hidden" name="id_mhs_asing" value="<?= $list_mhs_asing->id_mhs_asing ?>">
 
                           <div class="col-sm-12">
                               <div class="form-group form-float">
                                   <div class="form-line">
-                                      <input type="text" class="form-control" value="<?=isset($list_mhs_asing->tahun_akademik_asing) ? $list_mhs_asing->tahun_akademik_asing : ''?>" name="tahun_akademik_asing">
+                                      <input type="text" class="form-control" value="<?= $list_mhs_asing->tahun_akademik_asing ?>" name="tahun_akademik_asing">
                                       <label class="form-label">Tahun Akademik</label>
                                   </div>
                               </div>
@@ -45,7 +45,7 @@
                           <div class="col-sm-12">
                               <div class="form-group form-float">
                                   <div class="form-line">
-                                      <input type="text" class="form-control" value="<?=isset($list_mhs_asing->jumlahmhsaktif_asing) ? $list_mhs_asing->jumlahmhsaktif_asing : ''?>" name="jumlahmhsaktif_asing">
+                                      <input type="text" class="form-control" value="<?=isset($list_mhs->jumlahmhsaktif_asing) ? $list_mhs->jumlahmhsaktif_asing : ''?>" name="jumlahmhsaktif_asing">
                                       <label class="form-label">Jumlah Mahasiswa Aktif Asing</label>
                                   </div>
                               </div>
@@ -54,7 +54,7 @@
                           <div class="col-sm-12">
                               <div class="form-group form-float">
                                   <div class="form-line">
-                                      <input type="text" class="form-control" value="<?=isset($list_mhs_asing->jumlahmhsfull_asing) ? $list_mhs_asing->jumlahmhsfull_asing : ''?>" name="jumlahmhsfull_asing">
+                                      <input type="text" class="form-control" value="<?=isset($list_mhs->jumlahmhsfull_asing) ? $list_mhs->jumlahmhsfull_asing : ''?>" name="jumlahmhsfull_asing">
                                       <label class="form-label">Jumlah Mahasiswa Asing Aktif Full-time</label>
                                   </div>
                               </div>
@@ -63,7 +63,7 @@
                           <div class="col-sm-12">
                               <div class="form-group form-float">
                                   <div class="form-line">
-                                      <input type="text" class="form-control" value="<?=isset($list_mhs_asing->jumlahmhspart_asing) ? $list_mhs_asing->jumlahmhspart_asing : ''?>" name="jumlahmhspart_asing">
+                                      <input type="text" class="form-control" value="<?=isset($list_mhs->jumlahmhspart_asing) ? $list_mhs->jumlahmhspart_asing : ''?>" name="jumlahmhspart_asing">
                                       <label class="form-label">Jumlah Mahasiswa Asing Aktif Part-time</label>
                                       <input type="hidden" id="text-input" value="21" name="kriteria_kode">
                                       <input type="hidden" id="text-input" value="<?php echo $this->session->userdata('fakultas_id')?>" name="fakultas_id">

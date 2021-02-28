@@ -43,8 +43,8 @@
                     aria-expanded="false"></a>
                 <a href="#" onClick="return false;" class="bars"></a>
                 <a class="navbar-brand" href="<?= base_url() ?>index.html">
-                    <img src="<?= base_url() ?>assets/images/logo.png" alt="" />
-                    <span class="logo-name">Lorax</span>
+                    <!-- <img src="<?= base_url() ?>assets/images/uika_logo.png" alt="" /> -->
+                    <span class="logo-name">LKPS</span>
                 </a>
             </div>
             <div class="collapse navbar-collapse" id="navbar-collapse">
@@ -364,8 +364,8 @@
                 </div>
                 <div role="tabpanel" class="tab-pane stretchRight" id="settings">
                     <div class="demo-settings">
-                        <p>GENERAL SETTINGS</p>
-                        <ul class="setting-list">
+                        <!-- <p>GENERAL SETTINGS</p> -->
+                        <!-- <ul class="setting-list">
                             <li>
                                 <span>Report Panel Usage</span>
                                 <div class="switch">
@@ -384,9 +384,9 @@
                                     </label>
                                 </div>
                             </li>
-                        </ul>
-                        <p>SYSTEM SETTINGS</p>
-                        <ul class="setting-list">
+                        </ul> -->
+                        <!-- <p>SYSTEM SETTINGS</p> -->
+                        <!-- <ul class="setting-list">
                             <li>
                                 <span>Notifications</span>
                                 <div class="switch">
@@ -405,9 +405,9 @@
                                     </label>
                                 </div>
                             </li>
-                        </ul>
-                        <p>ACCOUNT SETTINGS</p>
-                        <ul class="setting-list">
+                        </ul> -->
+                        <!-- <p>ACCOUNT SETTINGS</p> -->
+                        <!-- <ul class="setting-list">
                             <li>
                                 <span>Offline</span>
                                 <div class="switch">
@@ -426,7 +426,7 @@
                                     </label>
                                 </div>
                             </li>
-                        </ul>
+                        </ul> -->
                     </div>
                 </div>
             </div>
@@ -448,7 +448,7 @@
       echo $js;
     }
      ?>
-     
+
 </body>
 
 <!-- Mirrored from www.radixtouch.in/templates/admin/lorax/source/light/pages/examples/blank.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 15 Nov 2019 17:15:16 GMT -->

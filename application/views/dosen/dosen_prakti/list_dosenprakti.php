@@ -3,7 +3,7 @@
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
             <ul class="breadcrumb breadcrumb-style ">
                 <li class="breadcrumb-item">
-                    <h4 class="page-title">Dosen Tetap</h4>
+                    <h4 class="page-title">Dosen Praktis/Industri</h4>
                 </li>
                 <li class="breadcrumb-item bcrumb-1">
                     <a href="<?php base_url() ?>Dashboard ">
@@ -13,7 +13,7 @@
             </ul>
         </div>
     </div>
-</div>
+</div
 <div class="row clearfix">
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
         <div class="card">
@@ -25,98 +25,31 @@
             <div class="body">
               <?php $data = $this->session->userdata('level_login');
                 if ($data == 5) { ?>
-                  <a  href="<?php echo base_url().'dosen/tambah_data_dosen'?>" class ="btn btn-success float-right mr-5" >Tambah data</a>
+                  <a  href="<?php echo base_url().'dosen/tambah_datapraktisi'?>" class ="btn btn-success float-right mr-5" >Tambah data</a>
                 <?php }
                ?>
 
                <!-- MODAL START -->
-                <div class="row clearfix js-sweetalert">
-                  <?php foreach ($list_data as $keymodal) { ?>
-                   <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
-                       <div class="modal fade" id="exampleModalCenter<?php echo $keymodal->id_profildosen ?>" tabindex="-1" role="dialog"
-                           aria-labelledby="formModal" aria-hidden="true">
-                           <div class="modal-dialog" role="document">
-                               <div class="modal-content">
-                                   <div class="modal-header">
-                                       <h5 class="modal-title" id="formModal">Keterangan Dikembalikan</h5>
-                                       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                           <span aria-hidden="true">&times;</span>
-                                       </button>
-                                   </div>
-                                   <div class="modal-body">
-                                       <form action="<?php echo base_url()?>dosen/disapprove_dosen" method="post">
-                                           <!-- <label for="email_address1">Email Address</label> -->
-                                           <div class="form-group">
-                                               <div class="form-line">
-                                                 <input type="hidden" name="id_profildosen" value="<?php echo $keymodal->id_profildosen ?>">
-                                                 <textarea name="ket_modal" placeholder="Masukan keterangan" rows="10"></textarea>
 
-                                               </div>
-                                           </div>
-                                           <!-- <br> -->
-                                   </div>
-                                   <div class="modal-footer">
-                                     <button type="submit" class="btn btn-info waves-effect">Kirim</button>
-                                     <!-- <button type="button" class="btn btn-primary m-t-15 waves-effect">Kirim</button> -->
-                                   </form>
-                                       <button type="button" class="btn btn-danger waves-effect"
-                                           data-dismiss="modal">Batal</button>
-                                   </div>
-                               </div>
-                           </div>
-                       </div>
-                   </div>
-
-                   <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
-                       <div class="modal fade" id="basicModal<?php echo $keymodal->id_profildosen ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-                           aria-hidden="true">
-                           <div class="modal-dialog" role="document">
-                               <div class="modal-content">
-                                   <div class="modal-header">
-                                       <h5 class="modal-title" id="exampleModalLabel">Keterangan</h5>
-                                       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                           <span aria-hidden="true">&times;</span>
-                                       </button>
-                                   </div>
-                                   <div class="modal-body">
-                                     <p>
-                                       <?=$keymodal->keterangan?>
-                                    </p>
-                                   </div>
-                                   <div class="modal-footer">
-                                       <a href="<?=base_url().'dosen/perbaikan_datadosen/'.$keymodal->id_profildosen?>" class="btn btn-info waves-effect">Perbaiki</a>
-                                       <button type="button" class="btn btn-danger waves-effect"
-                                           data-dismiss="modal">batal</button>
-                                   </div>
-                               </div>
-                           </div>
-                       </div>
-                   </div>
-                 <?php } ?>
-                </div>
                 <!-- MODAL END -->
 
-
                 <div class="table-responsive">
-                    <table id="tableExport" class="display table table-hover table-checkable order-column m-t-10 width-per-110">
+                    <table id="tableExport" class="display table table-hover table-checkable order-column m-t-0 width-per-100">
                         <thead>
                           <tr>
-                              <th>No</th>
-                              <th>Nama Dosen</th>
-                              <th>NIDN</th>
-                              <th>Pend Pasca Sarjana</th>
-                              <th>Bidang Keahlian</th>
-                              <th>Kesesuaian Komp Inti PS</th>
-                              <th>Jabatan Akademik</th>
-                              <th>Sert Pendidikan Profresional</th>
-                              <th>Sert Kopetensi</th>
-                              <th>Matakuliah Ps Diakreditasi</th>
-                              <th>Kesesuaian Matakuliah</th>
-                              <th>Matakuliah PS lain</th>
-                              <!-- <th>Status Dosen</th> -->
-                              <th>Status Verifikasi</th>
-                              <th>Action</th>
+                            <th>No</th>
+                            <th>Nama Dosen Praktisi</th>
+                            <th>NIDK</th>
+                            <th>Perusahaan/ Industri</th>
+                            <th>Pendidikan tertinggi</th>
+                            <th>Bidang Keahlian</th>
+                            <th>Sertifikat Profesi</th>
+                            <th>Mata Kuliah Diampu</th>
+                            <th>Bobot Kredit (sks)</th>
+                            <th>Status</th>
+                            <th>Action</th>
                           </tr>
+
                         </thead>
                         <tbody>
                           <?php $no=1; foreach ($list_data as $key) { ?>
@@ -124,7 +57,8 @@
                               <tr>
                                 <td><?=$no++?></td>
                                 <td><?=$key->nama_dosen?></td>
-                                <td><?=$key->nidn_dosen?></td>
+                                <td><?=$key->nidk?></td>
+                                <td><?=$key->prshaan_industri?></td>
                                 <td><?=$key->pendpasca_dosen?></td>
                                 <td><?php foreach ($bidangKeahlian as $bk) {
                                   if ($bk->profildosen_id == $key->id_profildosen) {
@@ -150,7 +84,7 @@
                                   echo "None";
                                 }?></td>
 
-                                <td><?=$key->sertpend_profesi?></td>
+                                <!-- <td><?=$key->sertpend_profesi?></td> -->
                                 <td><?=$key->sertkompen_industri?></td>
                                 <td><?php foreach ($dosen_tetap as $dos) {
                                   if ($dos->id_profildosen == $key->id_profildosen) {
@@ -207,9 +141,9 @@
                                     <td>
                                       <!-- TU ACTION -->
                                     <?php if ($data == 5) { ?>
-                                      <a href="<?=base_url().'dosen/tambah_data_dosen/'.$key->id_profildosen?>"><i class="fas fa-edit text-primary" style="font-size:20px;"></i></a> <br>
+                                      <a href="<?=base_url().'dosen/tambah_datapraktisi/'.$key->id_profildosen?>"><i class="fas fa-edit text-primary" style="font-size:20px;"></i></a> <br>
 
-                                      <a onClick="return confirm('Anda yakin inggin menghapus data ini?')"  style="margin-Top:5px" href="<?=base_url().'dosen/hapus_data_dosen/'.$key->id_profildosen?>"><i class="fas fa-trash text-danger" style="font-size:20px;"></i></a>
+                                      <a onClick="return confirm('Anda yakin inggin menghapus data ini?')"  style="margin-Top:5px" href="<?=base_url().'dosen/hapus_datapraktisi/'.$key->id_profildosen?>"><i class="fas fa-trash text-danger" style="font-size:20px;"></i></a>
 
                                       <!-- <?php if ($key->tu_status == 1) {?>
                                       <a href="javascript:void(0)" data-toggle="modal" data-target="#basicModal<?php echo $key->id_mhs_seleksi ?>"><i class="material-icons">error</i></a> -->
@@ -243,41 +177,3 @@
         </div>
     </div>
 </div>
-
-<!-- <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
-    <div class="modal fade" id="basicModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    Content goes here..
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-info waves-effect">Save</button>
-                    <button type="button" class="btn btn-danger waves-effect"
-                        data-dismiss="modal">Cancel</button>
-                </div>
-            </div>
-        </div>
-    </div>
-</div> -->
-
-<script>
-  window.onload = function() {
-      var anchors = document.getElementsByClassName('kembalikan');
-      for(var i = 0; i < anchors.length; i++) {
-          var anchor = anchors[i];
-          anchor.onclick = function(e) {
-              e.preventDefault();
-          }
-      }
-  }
-
-
-</script>

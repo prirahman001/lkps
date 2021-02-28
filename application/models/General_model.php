@@ -16,14 +16,25 @@ class general_model extends CI_Model
   return $q;
   }
 
-  //GEt data base
-  function getData($table)
+  // GEt data base
+  function getData($table,$field,$by)
   {
     $this->db->select("*");
     $this->db->from($table);
+    $this->db->order_by($field,$by);
+    $query=$this->db->get()->result();
+    return $query;
+  }
+
+  function getDataOrder($table)
+  {
+    $this->db->select("*");
+    $this->db->from($table);
+    // $this->db->order_by($field,$by);
   $query=$this->db->get()->result();
   return $query;
   }
+
   function insert_data($table, $data)
   {
     $this->db->insert($table, $data);
@@ -46,15 +57,48 @@ class general_model extends CI_Model
         $this->db->where($where);
         $this->db->update($table, $data);
       }
-      function getwhere($table,$field,$where){
+      function getwhere($table,$field,$where,$field1,$by){
         $this->db->select('*');
         $this->db->from($table);
         $this->db->where($field,$where);
+        $this->db->order_by($field1,$by);
+
+        $query = $this->db->get();
+        return $query;
+      }
+      function getKerjasamaPdf($table,$field,$where,$field1,$by){
+        $this->db->select('*');
+        $this->db->from($table);
+        $this->db->where($field,$where);
+        $this->db->where('gkm_status',1);
+        $this->db->where('gpm_status',1);
+        $this->db->order_by($field1,$by);
+
+        $query = $this->db->get();
+        return $query;
+      }
+      function getDosen($table,$field,$where,$field1,$by,$status){
+        $this->db->select('*');
+        $this->db->from($table);
+        $this->db->where($field,$where);
+        $this->db->where('status_dosen',$status);
+        $this->db->order_by($field1,$by);
 
         $query = $this->db->get();
         return $query;
       }
 
+      function getwhere2($table,$field,$where){
+        $this->db->select('*');
+        $this->db->from($table);
+        $this->db->where($field,$where);
+        $query = $this->db->get();
+        return $query;
+      }
+
+      function store_batch($tabel, $data){
+        return $this->db->insert_batch($tabel, $data);
+      }
       function getwhererow($table,$where){
         $this->db->select('*');
         $this->db->from($table);
@@ -62,6 +106,13 @@ class general_model extends CI_Model
 
         $query = $this->db->get();
         return $query->row();
+      }
+
+      function delete($table,$field,$where){
+
+        $this->db->where($field,$where);
+        $this->db->delete($table);
+
       }
 
       function hapus_row($table,$where){
@@ -75,6 +126,27 @@ class general_model extends CI_Model
         // $data = $this->db->get();
          // $data;
       }
+      // irfan
+      // function getjoin1()
+      // {
+      //   $this->db->select('*');
+      //   $this->db->from('ewmpdosen_tabel');
+      //   $this->db->join('profildosen_tabel','profildosen_tabel.id_profildosen = ewmpdosen_tabel.profildosen_id');
+      //   $this->db->where('ewmpdosen_tabel.prodi_id',1);
+      //   $query = $this->db->get();
+      //   return $query;
+      //
+      // }
+      function getjoin1($tabel,$tabeljoin,$fkjoin,$wherejoin,$id)
+      {
+        $this->db->select('*');
+        $this->db->from($tabel);
+        $this->db->join($tabeljoin,$fkjoin);
+        $this->db->where($wherejoin,$id);
+        $query = $this->db->get();
+        return $query;
 
-}
- ?>
+      }
+      // ewmpdosen_tabel,profildosen_tabel,id_profildosen,profildosen_id,prodi_id
+
+ }

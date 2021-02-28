@@ -24,7 +24,7 @@
 			<div class="wrap-login100">
 				<form action="<?= base_url()?>login/auth" method="post" class="login100-form validate-form" >
 					<span class="login100-form-logo">
-						<img alt="" src="<?= base_url() ?>assets/images/loading.png">
+						<img alt="" src="<?= base_url() ?>assets/images/uika_logo.png">
 					</span>
 					<span class="login100-form-title p-b-34 p-t-27">
 						Log in

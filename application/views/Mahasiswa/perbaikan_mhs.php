@@ -4,16 +4,16 @@
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                 <ul class="breadcrumb breadcrumb-style ">
                     <li class="breadcrumb-item">
-                        <h4 class="page-title">Tambah data</h4>
+                        <h4 class="page-title">Perbaikan data</h4>
                     </li>
                     <li class="breadcrumb-item bcrumb-1">
                         <a href="<?= base_url() ?>Dashboard">
                             <i class="fas fa-home"></i> Home</a>
                     </li>
                     <li class="breadcrumb-item bcrumb-2">
-                        <a href="<?= base_url() ?>kerjasama">Tabel Kerjasama</a>
+                        <a href="<?= base_url() ?>kerjasama">Tabel Mahasiswa</a>
                     </li>
-                    <li class="breadcrumb-item active">Tambah Data</li>
+                    <li class="breadcrumb-item active">Perbaikan Data</li>
                 </ul>
             </div>
         </div>
@@ -25,14 +25,13 @@
           <div class="card">
               <div class="header">
                   <h2>
-                      <strong>Tambah Data Mahasiswa Seleksi</h2>
+                      <strong>Perbaikan Data Mahasiswa Seleksi</h2>
               </div>
               <div class="body">
                   <div class="row clearfix">
                       <div class="col-sm-12">
-                        <form action="<?php echo base_url() ?>mahasiswa/simpan_datamhs" method="post">
+                        <form action="<?php echo base_url() ?>mahasiswa/perbaiki_mhs" method="post">
                           <input type="hidden" name="id_mhs_seleksi" value="<?= isset($list_mhs->id_mhs_seleksi) ? $list_mhs->id_mhs_seleksi : ''?>">
-
                           <div class="row clearfix">
                           <div class="col-sm-12">
                               <div class="form-group form-float">
